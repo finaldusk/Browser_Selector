@@ -18,7 +18,19 @@ namespace Browser_Selector
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+            this.MainNotifyIcon.Visible = true;
+        }
+
+        private void MainNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.Visible)
+            {
+                this.Hide();
+            }
+            else
+
+                this.Show();
         }
     }
 }
+

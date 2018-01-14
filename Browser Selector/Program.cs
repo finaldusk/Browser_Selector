@@ -90,5 +90,27 @@ namespace Browser_Selector
             
             
         }
+
+        /// <summary>
+        /// 注册启动项到注册表
+        /// </summary>
+        public static void Reg()
+        {          
+            var surekamKey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey("BSIE");            
+            var shellKey = surekamKey.CreateSubKey("shell");
+            var openKey = shellKey.CreateSubKey("open");
+            var commandKey = openKey.CreateSubKey("command");
+            surekamKey.SetValue("URL Protocol", "");            
+            var exePath = Process.GetCurrentProcess().MainModule.FileName;
+            commandKey.SetValue("", "\"" + exePath + "\"" + " \"%1\"");
+        }
+        /// <summary>
+        /// 取消注册
+        /// </summary>
+        public static void UnReg()
+        {
+            //直接删除节点
+            Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree("BSIE");
+        }
     }
 }
